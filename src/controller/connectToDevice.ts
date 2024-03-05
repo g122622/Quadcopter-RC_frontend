@@ -4,7 +4,7 @@
  * Created Date: 2024-03-05 14:45:49
  * Author: Guoyi
  * -----
- * Last Modified: 2024-03-05 15:50:39
+ * Last Modified: 2024-03-05 23:58:41
  * Modified By: Guoyi
  * -----
  * Copyright (c) 2024 Guoyi Inc.
@@ -13,14 +13,17 @@
  */
 
 import { useLoggerStore } from "../stores/logger"
+import { useQuadcopterDetailsStore } from "../stores/quadcopterDetails"
 
 const loggerStore = useLoggerStore()
-
+const quadcopterDetailsStore = useQuadcopterDetailsStore()
 const config = {
     RCServiceUUID: 0xffe0
 }
 
 export const connectToDevice = () => {
+
+
     return new Promise<void>((resolve, reject) => {
         let isBleSupported = !!navigator && ("bluetooth" in navigator)
         if (isBleSupported) {
@@ -36,6 +39,7 @@ export const connectToDevice = () => {
 
                     // 开始连接设备
                     const server = await device.gatt.connect();
+                    quadcopterDetailsStore.gattServer = server
                     console.log("server", server);
                     loggerStore.log(`gatt服务器连接成功`)
 
@@ -44,7 +48,7 @@ export const connectToDevice = () => {
                     // 监听characteristic
                     const service = await server.getPrimaryService(config.RCServiceUUID);
                     console.log("service", service);
-                    loggerStore.log(`gatt服务${config.RCServiceUUID}连接成功`)
+                    loggerStore.log(`gatt服务 0x${config.RCServiceUUID.toString(16)} 连接成功`)
 
                     // 读取信息
                     // const characteristic = await service.getCharacteristic(
