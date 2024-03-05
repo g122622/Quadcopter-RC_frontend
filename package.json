@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/web-bluetooth": "^0.0.20",
     "vue": "^3.4.19"
   },
   "devDependencies": {
