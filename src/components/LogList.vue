@@ -3,12 +3,13 @@ import { ref, computed, watch } from 'vue'
 import { useLoggerStore } from '../stores/logger';
 
 const logger = useLoggerStore()
+const listContainer = ref()
 const getColor = (level: string) => {
     switch (level) {
         case 'error':
             return 'rgb(229,108,59)'
         case 'warning':
-            return 'rgb(255, 204, 102)'
+            return 'rgb(225, 184, 72)'
         case 'info':
             return 'rgb(130, 211, 98)'
         case 'debug':
@@ -17,10 +18,13 @@ const getColor = (level: string) => {
             return '';
     }
 }
+watch(logger.logList, () => {
+    listContainer.value.scrollTop = listContainer.value.scrollHeight;
+})
 </script>
 
 <template>
-    <div id="log-list-container">
+    <div id="log-list-container" ref="listContainer">
         <div class="log-item" v-for="item in logger.logList" :key="item.timeStamp + item.message + item.level"
             :style="{ backgroundColor: getColor(item.level) }">
             {{ item.message }}
