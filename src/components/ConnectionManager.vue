@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { computed } from 'vue'
 import { useQuadcopterDetailsStore } from '../stores/quadcopterDetails';
 import { connectToDevice } from '../controller/connectToDevice';
+import { disconnect } from '../controller/disconnect';
 
 const quadcopterDetails = useQuadcopterDetailsStore()
-const count = ref(0)
 const markerColor = computed(() => {
     return quadcopterDetails.isConnected ? 'rgb(146, 212, 47)' : 'rgb(229, 108, 59)'
 })
@@ -16,7 +16,7 @@ const markerColor = computed(() => {
         <button type="button" @click="connectToDevice()" v-if="!quadcopterDetails.isConnected">
             <div class="innerText">连接设备</div>
         </button>
-        <button type="button" @click="count++" v-else>
+        <button type="button" @click="disconnect()" v-else>
             <div class="innerText">已连接，{{ quadcopterDetails.connectedTimeStr }}</div>
         </button>
     </div>
@@ -26,12 +26,12 @@ const markerColor = computed(() => {
 #connection-mgr-container {
     position: absolute;
     right: 5vw;
-    top: 1vw;
+    top: 2vh;
 }
 
 .innerText {
     display: list-item;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .innerText::marker {

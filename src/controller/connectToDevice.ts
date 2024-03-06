@@ -4,7 +4,7 @@
  * Created Date: 2024-03-05 14:45:49
  * Author: Guoyi
  * -----
- * Last Modified: 2024-03-05 23:58:41
+ * Last Modified: 2024-03-05 23:59:21
  * Modified By: Guoyi
  * -----
  * Copyright (c) 2024 Guoyi Inc.
@@ -15,14 +15,13 @@
 import { useLoggerStore } from "../stores/logger"
 import { useQuadcopterDetailsStore } from "../stores/quadcopterDetails"
 
-const loggerStore = useLoggerStore()
-const quadcopterDetailsStore = useQuadcopterDetailsStore()
 const config = {
     RCServiceUUID: 0xffe0
 }
 
 export const connectToDevice = () => {
-
+    const loggerStore = useLoggerStore()
+    const quadcopterDetailsStore = useQuadcopterDetailsStore()
 
     return new Promise<void>((resolve, reject) => {
         let isBleSupported = !!navigator && ("bluetooth" in navigator)
