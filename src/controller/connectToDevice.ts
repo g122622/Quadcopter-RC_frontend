@@ -4,7 +4,7 @@
  * Created Date: 2024-03-05 14:45:49
  * Author: Guoyi
  * -----
- * Last Modified: 2024-03-05 23:59:21
+ * Last Modified: 2024-03-12 21:46:53
  * Modified By: Guoyi
  * -----
  * Copyright (c) 2024 Guoyi Inc.
@@ -31,6 +31,7 @@ export const connectToDevice = () => {
                 // 显示蓝牙列表
                 const device = await navigator.bluetooth.requestDevice({
                     filters: [{ services: [config.RCServiceUUID] }],
+                    optionalServices: [config.RCServiceUUID, 0x1022]
                 });
                 if (device && device.gatt) {
                     console.log("device", device);

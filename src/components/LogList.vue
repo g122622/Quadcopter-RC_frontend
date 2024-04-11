@@ -40,6 +40,10 @@ watch(logger.logList, () => {
     height: 40vh;
     overflow-y: scroll;
     overflow-x: hidden;
+
+    border-radius: 12px;
+    background-color: #1a1a1a;
+    transition: border-color 0.25s;
 }
 
 .log-item {

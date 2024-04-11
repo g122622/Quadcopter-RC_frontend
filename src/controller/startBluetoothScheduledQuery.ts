@@ -4,7 +4,7 @@
  * Created Date: 2024-03-06 13:57:16
  * Author: Guoyi
  * -----
- * Last Modified: 2024-03-06 17:33:47
+ * Last Modified: 2024-03-12 22:02:28
  * Modified By: Guoyi
  * -----
  * Copyright (c) 2024 Guoyi Inc.
@@ -19,7 +19,6 @@ import sleep from "../utils/sleep"
  * 
  */
 export async function startBluetoothScheduledQuery() {
-    await sleep(1000)
     const quadcopterDetailsStore = useQuadcopterDetailsStore()
     setInterval(() => {
         if (quadcopterDetailsStore.gattServer && quadcopterDetailsStore.gattServer.connected) {
