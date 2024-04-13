@@ -25,9 +25,9 @@ watch(logger.logList, () => {
 
 <template>
     <div id="log-list-container" ref="listContainer">
-        <div class="log-item" v-for="item in logger.logList" :key="item.timeStamp + item.message + item.level"
+        <div class="log-item" v-for="(item, index) in logger.logList" :key="item.timeStamp + item.message + item.level"
             :style="{ backgroundColor: getColor(item.level) }">
-            {{ item.message }}
+            [{{ index + 1 }}] {{ item.message }}
         </div>
     </div>
 </template>
