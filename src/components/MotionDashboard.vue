@@ -1,12 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useQuadcopterDetailsStore } from '../stores/quadcopterDetails';
 
 const quadcopterDetails = useQuadcopterDetailsStore()
-const markerColor = computed(() => {
-    return quadcopterDetails.isConnected ? 'rgb(146, 212, 47)' : 'rgb(229, 108, 59)'
-})
-
 // setInterval(() => {
 //     quadcopterDetails.basicMotionData.ax = Math.random().toFixed(5);
 // }, 100)
@@ -57,5 +52,8 @@ const vHighlight = {
     border-radius: 12px;
     background-color: #1a1a1a;
     transition: border-color 0.25s;
+
+    font-size: small;
+    border: 1px solid #646cff;
 }
 </style>

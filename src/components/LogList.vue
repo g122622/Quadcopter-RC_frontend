@@ -44,6 +44,7 @@ watch(logger.logList, () => {
     border-radius: 12px;
     background-color: #1a1a1a;
     transition: border-color 0.25s;
+    border: 1px solid #646cff;
 }
 
 .log-item {

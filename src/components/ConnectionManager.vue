@@ -14,10 +14,10 @@ const markerColor = computed(() => {
 <template>
     <div id="connection-mgr-container">
         <button type="button" @click="connectToDevice()" v-if="!quadcopterDetails.isConnected">
-            <div class="innerText">连接设备</div>
+            <div class="innerText">📡连接无人机</div>
         </button>
         <button type="button" @click="disconnect()" v-else>
-            <div class="innerText">已连接，{{ quadcopterDetails.connectedTimeStr }}</div>
+            <div class="innerText">🔗已连接，{{ quadcopterDetails.connectedTimeStr }}</div>
         </button>
     </div>
 </template>
@@ -27,6 +27,7 @@ const markerColor = computed(() => {
     position: absolute;
     right: 5vw;
     top: 2vh;
+    font-size: 0.95em;
 }
 
 .innerText {
