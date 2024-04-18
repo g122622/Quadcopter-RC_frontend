@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { onMounted } from 'vue'
 import { useQuadcopterDetailsStore } from '../stores/quadcopterDetails';
 import { useLoggerStore } from "../stores/logger";
+import { submitPIDConfig } from '../controller/submitPIDConfig';
 
 const logger = useLoggerStore();
 const quadcopterDetails = useQuadcopterDetailsStore()
@@ -22,17 +23,21 @@ const loadPIDConfig = () => {
     const val = localStorage.getItem("PIDConfig")
     if (val) {
         quadcopterDetails.PIDConfig = JSON.parse(val)
-        logger.log("配置加载成功", "info")
+        logger.log("PID配置加载成功", "info")
     } else {
-        logger.log("本地配置为空", "warning")
+        logger.log("本地PID配置为空", "warning")
     }
 
 }
 
 const savePIDConfig = () => {
     localStorage.setItem("PIDConfig", JSON.stringify(quadcopterDetails.PIDConfig))
-    logger.log("配置保存成功", "info")
+    logger.log("PID配置保存成功", "info")
 }
+
+onMounted(() => {
+    loadPIDConfig()
+})
 
 </script>
 
@@ -101,6 +106,10 @@ const savePIDConfig = () => {
 
 .input-item {
     width: 30px;
+    background-color: #3f3f3f;
+    border: none;
+    border-radius: 3px;
+    margin: 2px;
 }
 
 .col-container {
