@@ -4,7 +4,7 @@
  * Created Date: 2024-03-05 13:57:19
  * Author: Guoyi
  * -----
- * Last Modified: 2024-04-18 15:47:21
+ * Last Modified: 2024-04-27 16:32:32
  * Modified By: Guoyi
  * -----
  * Copyright (c) 2024 Guoyi Inc.
@@ -33,6 +33,9 @@ export const useQuadcopterDetailsStore = defineStore("QuadcopterDetails", {
             { name: "Yaw", P: 1, I: 0, D: 5, max: 10 },
             { name: "Gyr", P: 1, I: 0, D: 5, max: 10 },
             { name: "Thr", P: 1, I: 0, D: 5, max: 10 }
-        ]
+        ],
+        BMS: {
+            batteryVoltage: -1
+        }
     })
 });

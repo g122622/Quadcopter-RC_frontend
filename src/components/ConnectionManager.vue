@@ -9,25 +9,48 @@ const markerColor = computed(() => {
     return quadcopterDetails.isConnected ? 'rgb(146, 212, 47)' : 'rgb(229, 108, 59)'
 })
 
+/**
+ * 检查当前是否已经全屏显示，如果没有则请求全屏显示，如果已经全屏显示则退出全屏显示。
+ * 可以在需要全屏显示的按钮或事件中调用这个函数来实现网页全屏显示。
+ */
+const toggleFullScreen = () => {
+    if (!document.fullscreenElement) {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+}
+
 </script>
 
 <template>
     <div id="connection-mgr-container">
-        <button type="button" @click="connectToDevice()" v-if="!quadcopterDetails.isConnected">
-            <div class="innerText">📡连接无人机</div>
-        </button>
-        <button type="button" @click="disconnect()" v-else>
-            <div class="innerText">🔗已连接，{{ quadcopterDetails.connectedTimeStr }}</div>
+        <div style="float: right;">
+            <button type="button" @click="connectToDevice()" v-if="!quadcopterDetails.isConnected">
+                <div class="innerText">📡连接无人机</div>
+            </button>
+            <button type="button" @click="disconnect()" v-else>
+                <div class="innerText">🔗已连接，{{ quadcopterDetails.connectedTimeStr }}</div>
+            </button>
+        </div>
+
+        <button type="button" @click="toggleFullScreen()" style="display: block; margin-top: 5px; float: right;">
+            <div>🖥️切换全屏</div>
         </button>
     </div>
 </template>
 
 <style scoped>
 #connection-mgr-container {
-    position: absolute;
-    right: 5vw;
-    top: 2vh;
+    float: right;
     font-size: 0.95em;
+    margin-top: 20px;
+    margin-right: 20px;
+    width: 19vw;
 }
 
 .innerText {

@@ -4,7 +4,7 @@
  * Created Date: 2024-03-04 21:21:49
  * Author: Guoyi
  * -----
- * Last Modified: 2024-04-14 00:41:02
+ * Last Modified: 2024-04-27 15:29:26
  * Modified By: Guoyi
  * -----
  * Copyright (c) 2024 Guoyi Inc.
@@ -17,7 +17,7 @@ import "./styles/globalStyles.css";
 import App from "./App.vue";
 import { createPinia } from "pinia";
 import { startBluetoothScheduledQuery } from "./controller/startBluetoothScheduledQuery";
-import { startMotionDataScheduledQuery } from "./controller/startMotionDataScheduledQuery";
+import { startMotionDataScheduledQuery } from "./controller/startCharacteristicsScheduledQuery";
 import sleep from "./utils/sleep";
 
 import { useLoggerStore } from "./stores/logger";

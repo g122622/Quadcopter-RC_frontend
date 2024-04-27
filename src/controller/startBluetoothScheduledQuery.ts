@@ -4,7 +4,7 @@
  * Created Date: 2024-03-06 13:57:16
  * Author: Guoyi
  * -----
- * Last Modified: 2024-04-18 16:33:42
+ * Last Modified: 2024-04-27 00:43:50
  * Modified By: Guoyi
  * -----
  * Copyright (c) 2024 Guoyi Inc.
@@ -13,7 +13,6 @@
  */
 
 import { useQuadcopterDetailsStore } from "../stores/quadcopterDetails";
-import sleep from "../utils/sleep";
 
 /**
  *
@@ -21,11 +20,7 @@ import sleep from "../utils/sleep";
 export async function startBluetoothScheduledQuery() {
     const quadcopterDetailsStore = useQuadcopterDetailsStore();
     setInterval(() => {
-        if (
-            quadcopterDetailsStore.gattServer &&
-            quadcopterDetailsStore.gattServer.connected &&
-            quadcopterDetailsStore.isConnected
-        ) {
+        if (quadcopterDetailsStore.gattServer && quadcopterDetailsStore.gattServer.connected) {
             // 更新连接状态
             quadcopterDetailsStore.isConnected = true;
             // 更新连接时间

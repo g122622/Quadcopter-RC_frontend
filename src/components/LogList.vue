@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useLoggerStore } from '../stores/logger';
 
 const logger = useLoggerStore()
@@ -24,7 +24,7 @@ watch(logger.logList, () => {
 </script>
 
 <template>
-    <div id="log-list-container" ref="listContainer">
+    <div id="log-list-container" class="dashboard-item" ref="listContainer">
         <div class="log-item" v-for="(item, index) in logger.logList" :key="item.timeStamp + item.message + item.level"
             :style="{ backgroundColor: getColor(item.level) }">
             [{{ index + 1 }}] {{ item.message }}
@@ -34,17 +34,8 @@ watch(logger.logList, () => {
 
 <style scoped>
 #log-list-container {
-    position: absolute;
-    left: 30vw;
-    top: 2vh;
+    float: left;
     height: 40vh;
-    overflow-y: scroll;
-    overflow-x: hidden;
-
-    border-radius: 12px;
-    background-color: #1a1a1a;
-    transition: border-color 0.25s;
-    border: 1px solid #646cff;
 }
 
 .log-item {
@@ -55,6 +46,5 @@ watch(logger.logList, () => {
     margin: 5px;
     padding: 2px;
     padding-left: 10px;
-    font-size: small;
 }
 </style>

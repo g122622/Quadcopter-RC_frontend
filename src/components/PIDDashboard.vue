@@ -42,7 +42,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div id="motion-dashboard-container">
+    <div id="PID-dashboard-container" class="dashboard-item">
         <div style="display: flex;flex-direction: row;">
             <div class="col-container">
                 <div style="height:15px;"> </div>
@@ -56,7 +56,7 @@ onMounted(() => {
                 </div>
                 <div class="roll-container" v-for="item in quadcopterDetails.PIDConfig">
                     <input v-for="sub in ['P', 'I', 'D']" class="input-item" type="number" min="0" :max="item.max"
-                        step="0.1" v-model="item[sub]" v-highlight="item.max"></input>
+                        step="0.1" v-model="(item as any)[sub]" v-highlight="item.max"></input>
                 </div>
             </div>
         </div>
@@ -75,21 +75,11 @@ onMounted(() => {
 </template>
 
 <style scoped>
-#motion-dashboard-container {
-    position: absolute;
-    left: 53.5vw;
-    top: 2vh;
+#PID-dashboard-container {
+    float: left;
     height: 40vh;
-    width: 20vw;
+    width: 23vw;
     padding: 5px 10px 5px 10px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-
-    border-radius: 12px;
-    background-color: #1a1a1a;
-    transition: border-color 0.25s;
-    border: 1px solid #646cff;
-    font-size: small;
 }
 
 .roll-container {
