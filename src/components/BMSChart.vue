@@ -1,17 +1,16 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import { useQuadcopterDetailsStore } from '../stores/quadcopterDetails';
-import { useLoggerStore } from "../stores/logger";
+// import { useLoggerStore } from "../stores/logger";
 import vHighlight from '@/directives/vHlight';
 
-const logger = useLoggerStore();
+// const logger = useLoggerStore();
 const quadcopterDetails = useQuadcopterDetailsStore()
 
 </script>
 
 <template>
     <div id="BMS-Chart-container" class="dashboard-item">
-        {{ quadcopterDetails.BMS.batteryVoltage }}
+        <div v-highlight="4300">{{ quadcopterDetails.BMS.batteryVoltage }}</div>
     </div>
 </template>
 

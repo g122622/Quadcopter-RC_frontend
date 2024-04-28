@@ -3,6 +3,10 @@ import { computed } from 'vue'
 import { useQuadcopterDetailsStore } from '../stores/quadcopterDetails';
 import { connectToDevice } from '../controller/connectToDevice';
 import { disconnect } from '../controller/disconnect';
+import { toggleFlightState } from '@/controller/toggleFlightState';
+import { submitPIDConfig } from '@/controller/submitPIDConfig';
+import { submitPWMConfig } from '@/controller/submitPWMConfig';
+
 
 const quadcopterDetails = useQuadcopterDetailsStore()
 const markerColor = computed(() => {
@@ -25,6 +29,12 @@ const toggleFullScreen = () => {
     }
 }
 
+const handleStartFlight = async () => {
+    await submitPIDConfig();
+    await submitPWMConfig();
+    await toggleFlightState(1);
+}
+
 </script>
 
 <template>
@@ -40,6 +50,12 @@ const toggleFullScreen = () => {
 
         <button type="button" @click="toggleFullScreen()" style="display: block; margin-top: 5px; float: right;">
             <div>🖥️切换全屏</div>
+        </button>
+        <button type="button" @click="handleStartFlight()" style="display: block; margin-top: 5px; float: right;">
+            <div>🚀开始飞行</div>
+        </button>
+        <button type="button" @click="toggleFlightState(0)" style="display: block; margin-top: 5px; float: right;">
+            <div>⛔停止飞行</div>
         </button>
     </div>
 </template>

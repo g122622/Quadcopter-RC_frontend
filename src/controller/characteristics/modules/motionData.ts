@@ -4,7 +4,7 @@
  * Created Date: 2024-04-27 15:14:16
  * Author: Guoyi
  * -----
- * Last Modified: 2024-04-27 16:43:27
+ * Last Modified: 2024-04-27 22:21:11
  * Modified By: Guoyi
  * -----
  * Copyright (c) 2024 Guoyi Inc.
@@ -30,6 +30,8 @@ const motionData: Characteristic = {
         quadcopterDetailsStore.basicMotionData.gx = dataView.getFloat32(12, true);
         quadcopterDetailsStore.basicMotionData.gy = dataView.getFloat32(16, true);
         quadcopterDetailsStore.basicMotionData.gz = dataView.getFloat32(20, true);
+        quadcopterDetailsStore.basicMotionData.pitch = dataView.getFloat32(24, true);
+        quadcopterDetailsStore.basicMotionData.roll = dataView.getFloat32(28, true);
     },
     errorHandler: noop,
     queryInterval: 100

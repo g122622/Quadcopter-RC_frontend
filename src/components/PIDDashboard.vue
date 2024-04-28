@@ -3,6 +3,8 @@ import { onMounted } from 'vue'
 import { useQuadcopterDetailsStore } from '../stores/quadcopterDetails';
 import { useLoggerStore } from "../stores/logger";
 import { submitPIDConfig } from '../controller/submitPIDConfig';
+import { submitPWMConfig } from '../controller/submitPWMConfig';
+
 
 const logger = useLoggerStore();
 const quadcopterDetails = useQuadcopterDetailsStore()
@@ -19,8 +21,8 @@ const vHighlight = {
     },
 }
 
-const loadPIDConfig = () => {
-    const val = localStorage.getItem("PIDConfig")
+const loadConfig = () => {
+    let val = localStorage.getItem("PIDConfig")
     if (val) {
         quadcopterDetails.PIDConfig = JSON.parse(val)
         logger.log("PID配置加载成功", "info")
@@ -28,15 +30,26 @@ const loadPIDConfig = () => {
         logger.log("本地PID配置为空", "warning")
     }
 
+    val = localStorage.getItem("PWMConfig")
+    if (val) {
+        quadcopterDetails.PWMConfig = JSON.parse(val)
+        logger.log("PWM配置加载成功", "info")
+    } else {
+        logger.log("本地PWM配置为空", "warning")
+    }
+
 }
 
-const savePIDConfig = () => {
+const saveConfig = () => {
     localStorage.setItem("PIDConfig", JSON.stringify(quadcopterDetails.PIDConfig))
     logger.log("PID配置保存成功", "info")
+
+    localStorage.setItem("PWMConfig", JSON.stringify(quadcopterDetails.PWMConfig))
+    logger.log("PWM配置保存成功", "info")
 }
 
 onMounted(() => {
-    loadPIDConfig()
+    loadConfig()
 })
 
 </script>
@@ -60,14 +73,26 @@ onMounted(() => {
                 </div>
             </div>
         </div>
+        <div class="roll-container">
+            <div style="width: 45%;">
+                basic:
+                <input class="input-item" type="number" min="0" :max="100" step="1"
+                    v-model="quadcopterDetails.PWMConfig.basic" v-highlight="100"></input>
+            </div>
+            <div style="width: 45%;">
+                mult:
+                <input class="input-item" type="number" min="0" :max="2" step="0.01"
+                    v-model="quadcopterDetails.PWMConfig.mult" v-highlight="100"></input>
+            </div>
+        </div>
         <div style="width: 100%;">
-            <button type="button" @click="loadPIDConfig()">
+            <button type="button" @click="loadConfig()">
                 📚️加载
             </button>
-            <button type="button" @click="savePIDConfig()">
+            <button type="button" @click="saveConfig()">
                 💾保存
             </button>
-            <button type="button" @click="submitPIDConfig()">
+            <button type="button" @click="submitPIDConfig(); submitPWMConfig();">
                 📤提交
             </button>
         </div>
@@ -77,7 +102,7 @@ onMounted(() => {
 <style scoped>
 #PID-dashboard-container {
     float: left;
-    height: 40vh;
+    height: 45vh;
     width: 23vw;
     padding: 5px 10px 5px 10px;
 }

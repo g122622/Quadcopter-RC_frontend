@@ -18,8 +18,10 @@ const quadcopterDetails = useQuadcopterDetailsStore()
             <div v-highlight="90">gy: {{ quadcopterDetails.basicMotionData.gy.toFixed(3) }}</div>
             <div v-highlight="90">gz: {{ quadcopterDetails.basicMotionData.gz.toFixed(3) }}</div>
         </div>
-        <div>
-            pitch: roll:
+        <div style="width: 90%; float: left;">
+            <div v-highlight="90">pitch: {{ quadcopterDetails.basicMotionData.pitch.toFixed(3) }}</div>
+            <div v-highlight="90">roll: {{ quadcopterDetails.basicMotionData.roll.toFixed(3) }}</div>
+            <!-- <div v-highlight="90">yaw: {{ quadcopterDetails.basicMotionData.yaw.toFixed(3) }}</div> -->
         </div>
     </div>
 </template>
